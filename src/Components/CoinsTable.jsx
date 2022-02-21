@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { CoinList } from '../Config/API'
@@ -80,12 +81,12 @@ const CoinsTable = () => {
                     style={{ margin: 18, fontFamily: "Montserrat" }}
                 >
                     Crypto Currency Prices by Market Cap
-                    <TextField 
+                    {/* <TextField 
                         label="Search for a Crypto Currency"
                         variant='outlined'
                         style={{ marginBottom: "20", width: "100%", marginTop: "2%", color: "white" }}
                         onChange={(e) => setSearch(e.target.value)}
-                    />
+                    /> */}
                     <TableContainer component={Paper} style={{marginTop: "2%"}}>
                     {loading ? (
                         <LinearProgress style={{ backgroundColor: "gold" }} />
@@ -128,7 +129,8 @@ const CoinsTable = () => {
                                     style={{
                                         display: "flex",
                                         gap: 15,
-                                        justifyContent: "center",
+                                        justifyContent: "left",
+                                        paddingLeft: "30%"
                                     }}
                                     >
                                     <img
