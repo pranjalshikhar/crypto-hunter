@@ -3,6 +3,7 @@ import { CoinList } from '../Config/API'
 import axios from 'axios'
 import { CryptoState } from '../CryptoContext'
 import { Container, createTheme, TextField, ThemeProvider, Typography, TableContainer, TableBody, LinearProgress, TableHead, Table, TableRow, TableCell, Paper } from '@material-ui/core'
+import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 
@@ -20,17 +21,24 @@ const CoinsTable = () => {
     const useStyles = makeStyles({
         row: {
         //   backgroundColor: "#032265",
-            background: "linear-gradient(90deg, rgba(5,4,20,1) 0%, rgba(19,49,113,1) 100%)",
+            background: "linear-gradient(90deg, rgba(5,4,20,1) 0%, rgba(19,49,113,1) 10%)",
             cursor: "pointer",
             "&:hover": {
                 backgroundColor: "#131111",
           },
           fontFamily: "Montserrat",
         },
-      });
+        pagination: {
+            "& .MuiPaginationItem-root": {
+              color: "gold",
+              fontWeight: "bold",
+              fontFamily: "Montserrat"
+            },
+        },
+    });
 
-      const classes = useStyles();
-      const history = useHistory();
+    const classes = useStyles();
+    const history = useHistory();
 
     // Fetch Data from API
     const fetchCoinList = async () => {
@@ -90,7 +98,8 @@ const CoinsTable = () => {
                                     color: "black",
                                     fontWeight: "700",
                                     fontFamily: "Montserrat",
-                                    textAlign: "center"
+                                    textAlign: "center",
+                                    fontSize: "50%"
                                 }}
                                 key={head}
                                 align={head === "Coin" ? "" : "right"}
@@ -103,7 +112,7 @@ const CoinsTable = () => {
 
                         <TableBody> 
                             {handleSearch()
-                            // .slice((page - 1) * 10, (page - 1) * 10 + 10)
+                            .slice((page - 1) * 10, (page - 1) * 10 + 10)
                             .map((row) => {
                                 const profit = row.price_change_percentage_24h > 0;
                                 return (
@@ -118,7 +127,7 @@ const CoinsTable = () => {
                                     style={{
                                         display: "flex",
                                         gap: 15,
-                                        justifyContent: "center"
+                                        justifyContent: "center",
                                     }}
                                     >
                                     <img
@@ -134,17 +143,19 @@ const CoinsTable = () => {
                                         style={{
                                             textTransform: "uppercase",
                                             fontSize: 22,
-                                            color: "white"
+                                            color: "white",
+                                            fontFamily: "Montserrat",
+                                            fontWeight: "bold"
                                         }}
                                         >
                                         {row.symbol}
                                         </span>
-                                        <span style={{ color: "white" }}>
+                                        <span style={{ color: "white", fontFamily: "Montserrat" }}>
                                         {row.name}
                                         </span>
                                     </div>
                                     </TableCell>
-                                    <TableCell align="center" style={{color: "white", fontWeight: "bold"}}>
+                                    <TableCell align="center" style={{color: "white", fontWeight: "bold", fontFamily: "Montserrat"}}>
                                     {symbol}{" "}
                                     {numberWithCommas(row.current_price.toFixed(2))}
                                     </TableCell>
@@ -153,12 +164,13 @@ const CoinsTable = () => {
                                     style={{
                                         color: profit > 0 ? "rgb(14, 203, 129)" : "red",
                                         fontWeight: 500,
+                                        fontFamily: "Montserrat"
                                     }}
                                     >
                                     {profit && "+"}
                                     {row.price_change_percentage_24h.toFixed(2)}%
                                     </TableCell>
-                                    <TableCell align="center" style={{color: "white", fontWeight: "bold"}}>
+                                    <TableCell align="center" style={{color: "white", fontWeight: "bold", fontFamily: "Montserrat"}}>
                                     {symbol}{" "}
                                     {numberWithCommas(
                                         row.market_cap.toString().slice(0, -6)
@@ -173,6 +185,22 @@ const CoinsTable = () => {
                     )}
                     </TableContainer>
                 </Typography>
+
+                {/* Comes from @material-ui/lab */}
+                <Pagination
+                    count={(handleSearch()?.length / 10).toFixed(0)}
+                    style={{
+                        padding: 20,
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                    classes={{ ul: classes.pagination }}
+                    onChange={(_, value) => {
+                        setPage(value);
+                        window.scroll(0, 450);
+                    }}
+                />
             </Container>
         </ThemeProvider>
     )
