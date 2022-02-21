@@ -5,7 +5,11 @@ import Carousel from './Carousel'
 
 const useStyles = makeStyles(() => ({
     banner : {
-        backgroundImage: 'url(./banner2.jpg)',
+        backgroundImage: 'url(./banner.jpg)',
+        // backgroundAttachment: 'fixed',
+        // backgroundPosition: 'center',
+        // backgroundRepeat: "no-repeat",
+        backgroundSize: "cover"
     },
     bannerContext : {
         height: 400,
@@ -36,6 +40,7 @@ const Banner = () => {
                         fontWeight: "bold",
                         marginBottom: 15,
                         fontFamily: "Montserrat",
+                        // color: "gold",
                         }}
                     >
                         Crypto Hunter
@@ -43,7 +48,7 @@ const Banner = () => {
                     <Typography
                         variant="subtitle2"
                         style={{
-                        color: "darkgrey",
+                        color: "darkgray",
                         textTransform: "capitalize",
                         fontFamily: "Montserrat",
                         }}

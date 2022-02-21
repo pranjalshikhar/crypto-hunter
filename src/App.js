@@ -7,7 +7,8 @@ import Header from "./Components/Header";
 
 const useStyles = makeStyles(() => ({
   App: {
-    backgroundColor: "#14161a",
+    // backgroundColor: "#14161a",
+    background: "linear-gradient(90deg, rgba(5,4,20,1) 0%, rgba(19,49,113,1) 100%)",
     color: "white",
     minHeight: "100vh",
   },
