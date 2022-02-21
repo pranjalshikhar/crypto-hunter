@@ -112,7 +112,7 @@ const CoinPage = () => {
               style={{
                 fontFamily: "Montserrat",
               }}>
-              {(coin?.market_cap_rank)}
+              {numberWithCommas(coin?.market_cap_rank)}
             </Typography>
           </span>
 
@@ -128,7 +128,7 @@ const CoinPage = () => {
               }}
             >
               {symbol}{" "}
-              {(coin?.market_data.current_price[currency.toLowerCase()]
+              {numberWithCommas(coin?.market_data.current_price[currency.toLowerCase()]
               )}
             </Typography>
           </span>
@@ -145,7 +145,7 @@ const CoinPage = () => {
               }}
             >
               {symbol}{" "}
-              {(
+              {numberWithCommas(
                 coin?.market_data.market_cap[currency.toLowerCase()]
                   .toString()
                   .slice(0, -6)
