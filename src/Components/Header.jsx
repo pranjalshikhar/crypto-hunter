@@ -4,6 +4,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { CryptoState } from '../CryptoContext';
 import AuthModal from './Authentication/AuthModal';
+import UserSidebar from './Authentication/UserSidebar';
 
 const useStyles = makeStyles(() => ({
     title: {
@@ -43,7 +44,7 @@ const Header = () => {
                         <MenuItem value={'USD'}>USD</MenuItem>
                         <MenuItem value={'INR'}>INR</MenuItem>
                     </Select>
-                    {user ? "Logout" : <AuthModal />}
+                    {user ? <UserSidebar /> : <AuthModal />}
                 </Toolbar>
             </Container>
         </AppBar>
