@@ -36,13 +36,19 @@ const Header = () => {
                     <Typography onClick={() => history.push("/")} className={classes.title} variant='h6'>
                         Crypto Hunter
                     </Typography>
-                    <Select variant='outlined' style={
-                        {width: 100, height: 40, marginRight: 15}
+                    <Select 
+                        variant='outlined'
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={currency}
+                        style={{
+                            width: 85, height: 40, marginRight: 15
+                        }
                     }
                     onChange={(e) => setCurrency(e.target.value)}
                     >
-                        <MenuItem value={'USD'}>USD</MenuItem>
                         <MenuItem value={'INR'}>INR</MenuItem>
+                        <MenuItem value={'USD'}>USD</MenuItem>
                     </Select>
                     {user ? <UserSidebar /> : <AuthModal />}
                 </Toolbar>

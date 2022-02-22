@@ -91,7 +91,7 @@ const CoinsTable = () => {
                                     color: "black",
                                     fontWeight: "700",
                                     fontFamily: "Montserrat",
-                                    textAlign: "center",
+                                    // textAlign: "center",
                                     fontSize: "50%"
                                 }}
                                 key={head}
@@ -120,8 +120,8 @@ const CoinsTable = () => {
                                     style={{
                                         display: "flex",
                                         gap: 15,
-                                        justifyContent: "left",
-                                        paddingLeft: "30%"
+                                        // justifyContent: "left",
+                                        // paddingLeft: "30%"
                                     }}
                                     >
                                     <img
@@ -149,12 +149,12 @@ const CoinsTable = () => {
                                         </span>
                                     </div>
                                     </TableCell>
-                                    <TableCell align="center" style={{color: "white", fontWeight: "bold", fontFamily: "Montserrat"}}>
+                                    <TableCell align="right" style={{color: "white", fontWeight: "bold", fontFamily: "Montserrat"}}>
                                     {symbol}{" "}
                                     {numberWithCommas(row.current_price.toFixed(2))}
                                     </TableCell>
                                     <TableCell
-                                    align="center"
+                                    align="right"
                                     style={{
                                         color: profit > 0 ? "rgb(14, 203, 129)" : "red",
                                         fontWeight: 500,
@@ -164,7 +164,7 @@ const CoinsTable = () => {
                                     {profit && "+"}
                                     {row.price_change_percentage_24h.toFixed(2)}%
                                     </TableCell>
-                                    <TableCell align="center" style={{color: "white", fontWeight: "bold", fontFamily: "Montserrat"}}>
+                                    <TableCell align="right" style={{color: "white", fontWeight: "bold", fontFamily: "Montserrat"}}>
                                     {symbol}{" "}
                                     {numberWithCommas(
                                         row.market_cap.toString().slice(0, -6)
