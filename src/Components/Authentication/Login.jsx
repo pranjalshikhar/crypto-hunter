@@ -1,11 +1,46 @@
 import { Box, Button, TextField } from '@material-ui/core'
 import React, { useState } from 'react'
+import { CryptoState } from '../../CryptoContext'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
+
 
 const Login = ({ handleClose }) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const { setAlert } = CryptoState()
 
-    const handleSubmit = () => {}
+    const handleSubmit = async () => {
+        if(!email || !password) {
+            setAlert({
+                open: true,
+                message: "All fields are required!",
+                type: "error"
+            });
+            return;
+        }
+        try {
+            const result = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            setAlert({
+                open: true,
+                message: `Login Successful. Welcome ${result.user.email}`,
+                type: "success",
+            });
+            handleClose();
+        }
+        catch (error) {
+            setAlert({
+                open: true,
+                message: error.message,
+                type: "error",
+            });
+            return;
+        }
+    }
 
     return (
         <Box p={3}
