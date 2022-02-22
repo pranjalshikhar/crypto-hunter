@@ -23,7 +23,7 @@ const CoinPage = () => {
       const { data } = await axios.get(SingleCoin(id));
       setCoin(data);
       // setLoading(false);
-  };
+    };
 
     console.log(coin)
 
@@ -86,7 +86,7 @@ const CoinPage = () => {
     const inWatchlist = watchlist.includes(coin?.id);
 
     const addToWatchlist = async () => {
-      const coinRef= doc(db, "watchlist", user.uid);
+      const coinRef = doc(db, "watchlist", user.uid);
       try {
         await setDoc(coinRef, 
           {coins:watchlist ? [...watchlist, coin?.id] : [coin.id]});
@@ -94,6 +94,28 @@ const CoinPage = () => {
           setAlert({
             open: true,
             message: `${coin.name} Added to the Watchlist!`,
+            type: "success",
+          });
+      } catch(error) {
+        setAlert({
+          open: true,
+          message: error.message,
+          type: "error",
+        });
+      }
+    }
+
+    const removeFromWatchlist = async () => {
+      const coinRef = doc(db, "watchlist", user.uid);
+      try {
+        await setDoc(coinRef, 
+          {coins: watchlist.filter((watch) => watch !== coin?.id)},
+          {merge: "true"}
+          );
+
+          setAlert({
+            open: true,
+            message: `${coin.name} Removed from the Watchlist!`,
             type: "success",
           });
       } catch(error) {
@@ -186,11 +208,11 @@ const CoinPage = () => {
               style={{
                 width: "100%",
                 height: 40,
-                backgroundColor: "#fed700",
+                backgroundColor: inWatchlist ? "red" : "#fed700",
                 fontWeight: "bold",
                 fontFamily: "Montserrat"
               }}
-              onClick={addToWatchlist}
+              onClick={inWatchlist ? removeFromWatchlist : addToWatchlist}
             >
               {inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
             </Button>    
