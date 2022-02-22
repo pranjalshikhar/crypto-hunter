@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import axios from 'axios'
 import { CoinList } from './Config/API'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebase'
 
 const Crypto = createContext()
 
@@ -14,7 +16,19 @@ const CryptoContext = ({ children }) => {
         open: false,
         message: "",
         type: "success",
-    })
+    });
+
+    useEffect(() => {
+        onAuthStateChanged(auth, user => {
+            if(user) {
+                setUser(user)
+            }
+            else {
+                setUser(null)
+            }
+        })
+    }, [])
+    
 
     // Fetch Data from API
     const fetchCoinList = async () => {
@@ -31,7 +45,7 @@ const CryptoContext = ({ children }) => {
     
 
     return (
-        <Crypto.Provider value={{currency, symbol, setCurrency, coins, loading, fetchCoinList, alert, setAlert}}>
+        <Crypto.Provider value={{currency, symbol, setCurrency, coins, loading, fetchCoinList, alert, setAlert, user}}>
             {children}
         </Crypto.Provider>
   )
