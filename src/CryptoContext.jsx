@@ -18,6 +18,8 @@ const CryptoContext = ({ children }) => {
         type: "success",
     });
 
+    const [watchlist, setWatchlist] = useState([]);
+
     useEffect(() => {
         onAuthStateChanged(auth, user => {
             if(user) {
@@ -26,8 +28,9 @@ const CryptoContext = ({ children }) => {
             else {
                 setUser(null)
             }
+            console.log(user)
         })
-    }, [])
+    }, []);
     
 
     // Fetch Data from API
@@ -45,7 +48,7 @@ const CryptoContext = ({ children }) => {
     
 
     return (
-        <Crypto.Provider value={{currency, symbol, setCurrency, coins, loading, fetchCoinList, alert, setAlert, user}}>
+        <Crypto.Provider value={{currency, symbol, setCurrency, coins, loading, fetchCoinList, alert, setAlert, user, watchlist}}>
             {children}
         </Crypto.Provider>
   )
