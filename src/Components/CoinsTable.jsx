@@ -20,22 +20,29 @@ const CoinsTable = () => {
 
     const useStyles = makeStyles({
         row: {
-        //   backgroundColor: "#032265",
-            background: "linear-gradient(90deg, rgba(5,4,20,1) 0%, rgba(19,49,113,1) 10%)",
-            cursor: "pointer",
-            "&:hover": {
-                backgroundColor: "#131111",
+          backgroundColor: "#032265",
+          // background: "linear-gradient(90deg, rgba(5,4,20,1) 0%, rgba(19,49,113,1) 10%)",
+          cursor: "pointer",
+          "&:hover": {
+            backgroundColor: "#131111"
           },
-          fontFamily: "Montserrat",
+          fontFamily: "Montserrat"
         },
         pagination: {
-            "& .MuiPaginationItem-root": {
-              color: "gold",
-              fontWeight: "bold",
-              fontFamily: "Montserrat"
+          "& .MuiPaginationItem-root": {
+            color: "gold",
+            fontWeight: "bold",
+            fontFamily: "Montserrat",
+            // backgroundColor: "white"
+            "&:hover": {
+              color: "white"
             },
-        },
-    });
+            "&:focus": {
+              color: "white"
+            }
+          }
+        }
+      });
 
     const classes = useStyles();
     const history = useHistory();
@@ -185,9 +192,10 @@ const CoinsTable = () => {
                     count={(handleSearch()?.length / 10).toFixed(0)}
                     style={{
                         padding: 20,
-                        width: "100%",
+                        width: "auto",
                         display: "flex",
                         justifyContent: "center",
+                        // backgroundColor: "white"
                     }}
                     classes={{ ul: classes.pagination }}
                     onChange={(_, value) => {
